@@ -10,7 +10,7 @@ func Contains[T comparable](slice []T, target T) bool {
 	return false
 }
 
-// Finds returns the first element in the slice for which the given match function returns true, or nil otherwise.
+// Find returns the first element in the slice for which the given match function returns true, or nil otherwise.
 // The second return value is true if an element was found, false otherwise.
 func Find[T any](slice []T, match func(T) bool) (*T, bool) {
 	for _, item := range slice {

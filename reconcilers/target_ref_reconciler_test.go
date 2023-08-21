@@ -17,9 +17,9 @@ import (
 
 func TestReconcileTargetBackReference(t *testing.T) {
 	var (
-		namespace             = "operator-unittest"
-		routeName             = "my-route"
-		annotationName string = "some-annotation"
+		namespace      = "operator-unittest"
+		routeName      = "my-route"
+		annotationName = "some-annotation"
 	)
 	baseCtx := context.Background()
 	ctx := logr.NewContext(baseCtx, log.Log)
@@ -77,7 +77,7 @@ func TestReconcileTargetBackReference(t *testing.T) {
 	objs := []runtime.Object{existingRoute}
 
 	// Create a fake client to mock API calls.
-	cl := fake.NewFakeClient(objs...)
+	cl := fake.NewClientBuilder().WithRuntimeObjects(objs...).Build()
 
 	targetRefReconciler := TargetRefReconciler{
 		Client: cl,
@@ -114,9 +114,9 @@ func TestReconcileTargetBackReference(t *testing.T) {
 
 func TestDeleteTargetBackReference(t *testing.T) {
 	var (
-		namespace             = "operator-unittest"
-		routeName             = "my-route"
-		annotationName string = "some-annotation"
+		namespace      = "operator-unittest"
+		routeName      = "my-route"
+		annotationName = "some-annotation"
 	)
 	baseCtx := context.Background()
 	ctx := logr.NewContext(baseCtx, log.Log)
@@ -177,7 +177,7 @@ func TestDeleteTargetBackReference(t *testing.T) {
 	objs := []runtime.Object{existingRoute}
 
 	// Create a fake client to mock API calls.
-	cl := fake.NewFakeClient(objs...)
+	cl := fake.NewClientBuilder().WithRuntimeObjects(objs...).Build()
 	targetRefReconciler := TargetRefReconciler{
 		Client: cl,
 	}

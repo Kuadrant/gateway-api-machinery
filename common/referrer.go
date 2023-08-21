@@ -9,7 +9,7 @@ import (
 type Referrer interface {
 	// Kind returns the kind of the referrer object, typically a Kuadrant Policy kind.
 	Kind() string
-	// AnnotationName returns the name of the annotation in a target reference object that contains the back references to the referrer objects.
+	// BackReferenceAnnotationName returns the name of the annotation in a target reference object that contains the back references to the referrer objects.
 	BackReferenceAnnotationName() string
 }
 

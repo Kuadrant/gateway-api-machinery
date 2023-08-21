@@ -53,7 +53,7 @@ func fetchHTTPRoute(ctx context.Context, k8sClient client.Reader, key client.Obj
 
 	httpRoute := &gatewayapiv1beta1.HTTPRoute{}
 	err := k8sClient.Get(ctx, key, httpRoute)
-	logger.V(1).Info("fecth HTTPRoute policy targetRef", "httpRoute", key, "err", err)
+	logger.V(1).Info("fetch HTTPRoute policy targetRef", "httpRoute", key, "err", err)
 	if err != nil {
 		return nil, err
 	}

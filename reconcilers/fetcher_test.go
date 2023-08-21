@@ -82,7 +82,7 @@ func TestFetchTargetRefObject(t *testing.T) {
 	objs := []runtime.Object{existingRoute}
 
 	// Create a fake client to mock API calls.
-	clientAPIReader := fake.NewFakeClient(objs...)
+	clientAPIReader := fake.NewClientBuilder().WithRuntimeObjects(objs...).Build()
 
 	res, err := FetchTargetRefObject(ctx, clientAPIReader, targetRef, namespace)
 	if err != nil {
@@ -147,7 +147,7 @@ func TestFetchGateway(t *testing.T) {
 	objs := []runtime.Object{existingGateway}
 
 	// Create a fake client to mock API calls.
-	clientAPIReader := fake.NewFakeClient(objs...)
+	clientAPIReader := fake.NewClientBuilder().WithRuntimeObjects(objs...).Build()
 
 	key := client.ObjectKey{Name: gwName, Namespace: namespace}
 
@@ -224,7 +224,7 @@ func TestFetchHTTPRoute(t *testing.T) {
 	objs := []runtime.Object{existingRoute}
 
 	// Create a fake client to mock API calls.
-	clientAPIReader := fake.NewFakeClient(objs...)
+	clientAPIReader := fake.NewClientBuilder().WithRuntimeObjects(objs...).Build()
 
 	key := client.ObjectKey{Name: routeName, Namespace: namespace}
 
