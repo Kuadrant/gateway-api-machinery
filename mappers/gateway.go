@@ -7,7 +7,7 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/reconcile"
 	gatewayapiv1beta1 "sigs.k8s.io/gateway-api/apis/v1beta1"
 
-	"github.com/kuadrant/controller-runtime-ext/common"
+	"github.com/kuadrant/gateway-api-machinery/common"
 )
 
 // TODO(@guicassolato): unit test

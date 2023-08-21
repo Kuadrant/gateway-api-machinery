@@ -5,7 +5,7 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/client"
 	"sigs.k8s.io/controller-runtime/pkg/reconcile"
 
-	"github.com/kuadrant/controller-runtime-ext/common"
+	"github.com/kuadrant/gateway-api-machinery/common"
 )
 
 type EventMapper interface {

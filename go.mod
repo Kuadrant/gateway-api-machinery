@@ -1,4 +1,4 @@
-module github.com/kuadrant/controller-runtime-ext
+module github.com/kuadrant/gateway-api-machinery
 
 go 1.20
 

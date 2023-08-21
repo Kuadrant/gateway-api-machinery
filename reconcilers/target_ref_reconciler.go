@@ -7,7 +7,7 @@ import (
 	"github.com/go-logr/logr"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
-	"github.com/kuadrant/controller-runtime-ext/common"
+	"github.com/kuadrant/gateway-api-machinery/common"
 )
 
 type TargetRefReconciler struct {

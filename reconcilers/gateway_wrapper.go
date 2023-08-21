@@ -6,7 +6,7 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/client"
 	gatewayapiv1beta1 "sigs.k8s.io/gateway-api/apis/v1beta1"
 
-	"github.com/kuadrant/controller-runtime-ext/common"
+	"github.com/kuadrant/gateway-api-machinery/common"
 )
 
 // GatewayWrapper wraps a Gateway API Gateway adding methods and configs to manage policy references in annotations
