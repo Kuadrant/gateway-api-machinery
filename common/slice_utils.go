@@ -10,8 +10,44 @@ func Contains[T comparable](slice []T, target T) bool {
 	return false
 }
 
-// Find returns the first element in the slice for which the given match function returns true, or nil otherwise.
-// The second return value is true if an element was found, false otherwise.
+// SameElements checks if the two slices contain the exact same elements. Order does not matter.
+func SameElements[T comparable](s1, s2 []T) bool {
+	if len(s1) != len(s2) {
+		return false
+	}
+	for _, v := range s1 {
+		if !Contains(s2, v) {
+			return false
+		}
+	}
+	return true
+}
+
+func Intersect[T comparable](slice1, slice2 []T) bool {
+	for _, item := range slice1 {
+		if Contains(slice2, item) {
+			return true
+		}
+	}
+	return false
+}
+
+func Intersection[T comparable](slice1, slice2 []T) []T {
+	smallerSlice := slice1
+	largerSlice := slice2
+	if len(slice1) > len(slice2) {
+		smallerSlice = slice2
+		largerSlice = slice1
+	}
+	var result []T
+	for _, item := range smallerSlice {
+		if Contains(largerSlice, item) {
+			result = append(result, item)
+		}
+	}
+	return result
+}
+
 func Find[T any](slice []T, match func(T) bool) (*T, bool) {
 	for _, item := range slice {
 		if match(item) {
@@ -37,6 +73,17 @@ func Map[T, U any](slice []T, f func(T) U) []U {
 	arr := make([]U, len(slice))
 	for i, e := range slice {
 		arr[i] = f(e)
+	}
+	return arr
+}
+
+// Filter filters the input slice using the given predicate function and returns a new slice with the results.
+func Filter[T any](slice []T, f func(T) bool) []T {
+	arr := make([]T, 0)
+	for _, e := range slice {
+		if f(e) {
+			arr = append(arr, e)
+		}
 	}
 	return arr
 }

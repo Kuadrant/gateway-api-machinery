@@ -22,6 +22,28 @@ func (g GatewayWrapper) Key() client.ObjectKey {
 	return client.ObjectKeyFromObject(g.Gateway)
 }
 
+func (g GatewayWrapper) PolicyRefs() []client.ObjectKey {
+	if g.Gateway == nil {
+		return make([]client.ObjectKey, 0)
+	}
+
+	gwAnnotations := common.ReadAnnotationsFromObject(g)
+
+	val, ok := gwAnnotations[g.BackReferenceAnnotationName()]
+	if !ok {
+		return make([]client.ObjectKey, 0)
+	}
+
+	var refs []client.ObjectKey
+
+	err := json.Unmarshal([]byte(val), &refs)
+	if err != nil {
+		return make([]client.ObjectKey, 0)
+	}
+
+	return refs
+}
+
 func (g GatewayWrapper) ContainsPolicy(policyKey client.ObjectKey) bool {
 	if g.Gateway == nil {
 		return false
@@ -103,4 +125,35 @@ func (g GatewayWrapper) DeletePolicy(policyKey client.ObjectKey) bool {
 
 	// annotation exists and does not contain a back reference the policy → nothing to do
 	return false
+}
+
+// Hostnames builds a list of hostnames from the listeners.
+func (g GatewayWrapper) Hostnames() []gatewayapiv1beta1.Hostname {
+	hostnames := make([]gatewayapiv1beta1.Hostname, 0)
+	if g.Gateway == nil {
+		return hostnames
+	}
+
+	for idx := range g.Spec.Listeners {
+		if g.Spec.Listeners[idx].Hostname != nil {
+			hostnames = append(hostnames, *g.Spec.Listeners[idx].Hostname)
+		}
+	}
+
+	return hostnames
+}
+
+// GatewayWrapperList is a list of GatewayWrappers that implements sort.Interface
+type GatewayWrapperList []GatewayWrapper
+
+func (g GatewayWrapperList) Len() int {
+	return len(g)
+}
+
+func (g GatewayWrapperList) Less(i, j int) bool {
+	return g[i].CreationTimestamp.Before(&g[j].CreationTimestamp)
+}
+
+func (g GatewayWrapperList) Swap(i, j int) {
+	g[i], g[j] = g[j], g[i]
 }

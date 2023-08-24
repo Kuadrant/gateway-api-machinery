@@ -41,8 +41,8 @@ func (r *TargetRefReconciler) ReconcileTargetBackReference(ctx context.Context, 
 	return nil
 }
 
-// ReconcileTargetBackReference removes the policy key from the annotations of the target object
-func (r *TargetRefReconciler) DeleteTargetBackReference(ctx context.Context, policyKey client.ObjectKey, targetNetworkObject client.Object, annotationName string) error {
+// DeleteTargetBackReference removes the policy key from the annotations of the target object
+func (r *TargetRefReconciler) DeleteTargetBackReference(ctx context.Context, _ client.ObjectKey, targetNetworkObject client.Object, annotationName string) error {
 	logger, _ := logr.FromContext(ctx)
 
 	targetNetworkObjectKey := client.ObjectKeyFromObject(targetNetworkObject)
