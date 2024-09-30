@@ -1,3 +1,10 @@
+**⚠️ DEPRECATED**
+
+This repo has been deprecated and will no longer be maintained.
+Please refer instead to Kuadrant [**Policy Machinery**](https://github.com/kuadrant/policy-machinery).
+
+----
+
 # Kuadrant Gateway API Machinery
 
 Kuadrant's shared library for implementing Gateway API policy controllers.
